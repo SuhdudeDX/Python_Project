@@ -1,15 +1,22 @@
 import numpy as np
 import pandas as pd
 from scipy.integrate import odeint
+import tkinter as tk
 
 class Life:
-    def __init__(self, income, tax_rate, spending, pension, starting_age, retirement_age):
-        self.income = income
-        self.tax_rate = tax_rate
-        self.spending = spending
-        self.pension = pension
+    def __init__(self, income, tax_rate, costs, pension, starting_age, retirement_age, life_inflation, investment_fraction, interest_rate_proc, inflation_proc):
         self.starting_age = starting_age
         self.retirement_age = retirement_age
+        self.income = income
+        self.tax_rate = tax_rate
+        self.costs = costs
+        self.pension = pension
+        self.life_inflation = life_inflation
+        self.investment_fraction = investment_fraction
+        self.interest_rate_proc = interest_rate_proc
+        self.inflation_proc = inflation_proc
+
+
 
     def earn(self, t):
         if t < self.starting_age:
@@ -20,7 +27,7 @@ class Life:
             return 12 * self.pension
 
     def spend(self, t):
-        return 12 * self.spending
+        return 12 * self.costs
 
     def pay_taxes(self, t):
         return self.earn(t) * self.tax_rate
@@ -41,4 +48,7 @@ def simulate(you):
     df1 = pd.DataFrame({'time': t1, 'wallet (non-investor)': x1})
     df2 = pd.DataFrame({'time': t2, 'wallet (non-investor)': x2})
     return pd.concat([df0, df1, df2])
+
+def getdata():
+    pass
 
