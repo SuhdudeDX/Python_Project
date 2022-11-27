@@ -3,7 +3,7 @@ import pandas as pd
 from scipy.integrate import odeint
 import tkinter as tk
 
-class Life:
+class Life: #main class for the project
     def __init__(self, income, costs, tax_rate, pension, starting_age, retirement_age, life_inflation, investment_fraction, interest_rate_proc, inflation_proc):
         self.starting_age = starting_age
         self.retirement_age = retirement_age
@@ -21,12 +21,14 @@ class Life:
         if t < self.starting_age:
             return 0
         elif self.starting_age <= t < self.retirement_age:
-            return 12 * self.income
+            return 12 * (self.income + self.pay_rise * (t - self.starting_age))
         else:
             return 12 * self.pension
 
     def spend(self, t):
-        return 12 * self.costs
+        if (t < self.starting_age):
+            return 0
+        return 12 * (self.costs + self.life_inflation * (t - self.starting_age))
 
     def pay_taxes(self, t):
         return self.earn(t) * self.tax_rate
@@ -52,27 +54,19 @@ def simulate(you):
 
 root = tk.Tk()
 
-e = ""
-
-def enter():
+def enter(): #get the inputs from GUI and return it
     a = text1.get()
-    print(a)
     b = text2.get()
-    print(b)
     c = text3.get()
-    print(c)
     d = text4.get()
-    print(d)
     e = text5.get()
-    print(e)
     f = text6.get()
-    print(f)
     g = text7.get()
-    print(g)
     h = text8.get()
-    print(h)
-    data = Life(a, b, c, d, e, f, g, h)
-    print(data)
+    i = text9.get()
+    j = text10.get()
+    you = Life(a, b, c, d, e, f, g, h, i, j)
+    return you
 
 root.geometry('350x350')
 root.title('Personal Finance Calculator')
@@ -124,5 +118,6 @@ enterbtn.grid(pady=10, column=1)
 
 root.mainloop()
 
-print(root)
+you = Life()
+df = simulate(you)
 
