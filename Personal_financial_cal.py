@@ -3,8 +3,8 @@ import pandas as pd
 from scipy.integrate import odeint
 import tkinter as tk
 
-class Life: #main class for the project
-    def __init__(self, income, costs, tax_rate, pension, starting_age, retirement_age, life_inflation, investment_fraction, interest_rate_proc, inflation_proc):
+class Life: #main class
+    def __init__(self, income, costs, tax_rate, pension, starting_age, retirement_age, life_inflation, investment_fraction, interest_rate_proc, inflation_proc, pay_rise):
         self.starting_age = starting_age
         self.retirement_age = retirement_age
         self.income = income
@@ -15,6 +15,7 @@ class Life: #main class for the project
         self.investment_fraction = investment_fraction
         self.interest_rate_proc = interest_rate_proc
         self.inflation_proc = inflation_proc
+        self.pay_rise = pay_rise
 
 
     def earn(self, t):
@@ -34,10 +35,10 @@ class Life: #main class for the project
         return self.earn(t) * self.tax_rate
 
     
-def live_without_investing(x, t, you):
+def live_without_investing(x, t, you): #no investing
     return you.earn(t) - you.spend(t) - you.pay_taxes(t)
 
-def simulate(you):
+def simulate(you): #graphs
     t0 = np.linespace(0, you.starting_age - 1, num=you.starting_age)
     t1 = np.linespace(you.starting_age, you.retirement_age - 1, num=(you.retirement_age - you.starting_age))
     t2 = np.linespace(you.retirement_age, 100, num=(100 - you.retirement_age))
@@ -49,7 +50,7 @@ def simulate(you):
     df0 = pd.DataFrame({'time': t0, 'wallet (non-investor)': x0})
     df1 = pd.DataFrame({'time': t1, 'wallet (non-investor)': x1})
     df2 = pd.DataFrame({'time': t2, 'wallet (non-investor)': x2})
-    return pd.concat([df0, df1, df2])
+    return pd.concat([df0, df1, df2]) #connect 3 dataframes
 
 
 root = tk.Tk()
@@ -65,7 +66,8 @@ def enter(): #get the inputs from GUI and return it
     h = text8.get()
     i = text9.get()
     j = text10.get()
-    you = Life(a, b, c, d, e, f, g, h, i, j)
+    k = text11.get()
+    you = Life(a, b, c, d, e, f, g, h, i, j, k)
     return you
 
 root.geometry('350x350')
@@ -112,8 +114,12 @@ IFproctext = tk.Label(root, text='Inflation Proc', font=16).grid(row=9, sticky=t
 text10 = tk.Entry(width=15, font = 16)
 text10.grid(row=9, column=1, sticky=tk.E)
 
-enterbtn = tk.Button(root, height=1, text='Enter', font=16, command=enter)
-enterbtn.grid(pady=10, column=1)
+Pay_risetext = tk.Label(root, text='Pay rise', font=16).grid(row=10, sticky=tk.W)
+text11 = tk.Entry(width=15, font = 16)
+text11.grid(row=10, column=1, sticky=tk.E)
+
+enterbtn = tk.Button(root, height=1, text='Enter', font=16, command=enter) #button
+enterbtn.grid(pady=11, column=1)
 
 
 root.mainloop()
