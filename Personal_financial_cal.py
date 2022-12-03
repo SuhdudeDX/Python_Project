@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 from scipy.integrate import odeint
 import tkinter as tk
+import matplotlib as plt
 
 class Life: #main class
     def __init__(self, income, costs, tax_rate, pension, starting_age, retirement_age, life_inflation, investment_fraction, interest_rate_proc, inflation_proc, pay_rise):
@@ -35,8 +36,23 @@ class Life: #main class
         return self.earn(t) * self.tax_rate
 
     
-def live_without_investing(x, t, you): #no investing
-    return you.earn(t) - you.spend(t) - you.pay_taxes(t)
+def live_without_investing(x, t, you):#no invest
+    balance = you.earn(t) - you.spend(t) - you.pay_taxes(t)
+    return balance - np.log(1 + 0.01*you.inflation_proc) * x
+
+def live_with_investing(x, t, you):#invest
+    balance = you.earn(t) - you.spend(t) - you.pay_taxes(t)
+    if t < you.retirement_age:
+        x0 = balance * (1 - you.investment_fraction)
+        x1 = np.log(1 + 0.01*you.interest_rate_proc) * x[1] + you.investment_fraction * balance
+        
+        x0 = x0 - np.log(1 + 0.01*you.inflation_proc) * x[0]
+        x1 = x1 - np.log(1 + 0.01*you.inflation_proc) * x[1]
+    else:
+        x0 = balance
+        x0 = x0 - np.log(1 + 0.01*you.inflation_proc) * x[0]
+        x1 = 0
+    return [x0, x1]
 
 def simulate(you): #graphs
     t0 = np.linespace(0, you.starting_age - 1, num=you.starting_age)
@@ -54,6 +70,8 @@ def simulate(you): #graphs
 
 
 root = tk.Tk()
+root.geometry('360x380')
+root.title('Personal Finance Calculator')
 
 def enter(): #get the inputs from GUI and return it
     a = text1.get()
@@ -69,9 +87,6 @@ def enter(): #get the inputs from GUI and return it
     k = text11.get()
     you = Life(a, b, c, d, e, f, g, h, i, j, k)
     return you
-
-root.geometry('350x350')
-root.title('Personal Finance Calculator')
 
 
 incometext = tk.Label(root, text='Income', font=16).grid(row=0, sticky=tk.W)
@@ -125,5 +140,8 @@ enterbtn.grid(pady=11, column=1)
 root.mainloop()
 
 you = Life()
+
 df = simulate(you)
+
+
 
