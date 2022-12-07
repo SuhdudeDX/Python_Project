@@ -55,9 +55,9 @@ def live_with_investing(x, t, you):#invest
     return [x0, x1]
 
 def simulate(you): #graphs
-    t0 = np.linespace(0, you.starting_age - 1, num=you.starting_age)
-    t1 = np.linespace(you.starting_age, you.retirement_age - 1, num=(you.retirement_age - you.starting_age))
-    t2 = np.linespace(you.retirement_age, 100, num=(100 - you.retirement_age))
+    t0 = np.linspace(0, you.starting_age - 1, num=you.starting_age)
+    t1 = np.linspace(you.starting_age, you.retirement_age - 1, num=(you.retirement_age - you.starting_age))
+    t2 = np.linspace(you.retirement_age, 100, num=(100 - you.retirement_age))
 
     x0 = np.zeros((t0.shape[0], 1))
     x1 = odeint(live_without_investing, 0, t1, args=(you,))
@@ -90,47 +90,47 @@ def enter(): #get the inputs from GUI and return it
 
 
 incometext = tk.Label(root, text='Income', font=16).grid(row=0, sticky=tk.W)
-text1 = tk.Entry(width=15, font = 16)
+text1 = tk.Entry(root, width=15, font = 16)
 text1.grid(row=0, column=1, sticky=tk.E)
 
 coststext = tk.Label(root, text='Spending', font=16).grid(row=1, sticky=tk.W)
-text2 = tk.Entry(width=15, font = 16)
+text2 = tk.Entry(root, width=15, font = 16)
 text2.grid(row=1, column=1, sticky=tk.E)
 
 taxtext = tk.Label(root, text='Tax', font=16).grid(row=2, sticky=tk.W)
-text3 = tk.Entry(width=15, font = 16)
+text3 = tk.Entry(root, width=15, font = 16)
 text3.grid(row=2, column=1, sticky=tk.E)
 
 startage = tk.Label(root, text='Starting Age', font=16).grid(row=3, sticky=tk.W)
-text4 = tk.Entry(width=15, font = 16)
+text4 = tk.Entry(root, width=15, font = 16)
 text4.grid(row=3, column=1, sticky=tk.E)
 
 retireage = tk.Label(root, text='Retiring Age', font=16).grid(row=4, sticky=tk.W)
-text5 = tk.Entry(width=15, font = 16)
+text5 = tk.Entry(root, width=15, font = 16)
 text5.grid(row=4, column=1, sticky=tk.E)
 
 pensiontext = tk.Label(root, text='Pension', font=16).grid(row=5, sticky=tk.W)
-text6 = tk.Entry(width=15, font = 16)
+text6 = tk.Entry(root, width=15, font = 16)
 text6.grid(row=5, column=1, sticky=tk.E)
 
 Investfractext = tk.Label(root, text='Investment Fraction', font=16).grid(row=6, sticky=tk.W)
-text7 = tk.Entry(width=15, font = 16)
+text7 = tk.Entry(root, width=15, font = 16)
 text7.grid(row=6, column=1, sticky=tk.E)
 
 lifeinflationtext = tk.Label(root, text='Life Inflation', font=16).grid(row=7, sticky=tk.W)
-text8 = tk.Entry(width=15, font = 16)
+text8 = tk.Entry(root, width=15, font = 16)
 text8.grid(row=7, column=1, sticky=tk.E)
 
 IRproctext = tk.Label(root, text='Interest Rate', font=16).grid(row=8, sticky=tk.W)
-text9 = tk.Entry(width=15, font = 16)
+text9 = tk.Entry(root, width=15, font = 16)
 text9.grid(row=8, column=1, sticky=tk.E)
 
 IFproctext = tk.Label(root, text='Inflation Proc', font=16).grid(row=9, sticky=tk.W)
-text10 = tk.Entry(width=15, font = 16)
+text10 = tk.Entry(root, width=15, font = 16)
 text10.grid(row=9, column=1, sticky=tk.E)
 
 Pay_risetext = tk.Label(root, text='Pay rise', font=16).grid(row=10, sticky=tk.W)
-text11 = tk.Entry(width=15, font = 16)
+text11 = tk.Entry(root, width=15, font = 16)
 text11.grid(row=10, column=1, sticky=tk.E)
 
 enterbtn = tk.Button(root, height=1, text='Enter', font=16, command=enter) #button
@@ -139,7 +139,7 @@ enterbtn.grid(pady=11, column=1)
 
 root.mainloop()
 
-you = Life()
+you = enter()
 
 df = simulate(you)
 
