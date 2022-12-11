@@ -60,7 +60,7 @@ def live_with_investing(x, t, you):
         x1 = 0
     return [x0, x1]
 
-def simulate(you):
+def simulate(you):#graph variables
     t0 = np.linspace(0, you.starting_age - 1, num=you.starting_age)
     t1 = np.linspace(you.starting_age, you.retirement_age - 1, num=(you.retirement_age - you.starting_age))
     t2 = np.linspace(you.retirement_age, 100, num=(100 - you.retirement_age + 1))
@@ -135,28 +135,39 @@ text11 = tk.Entry(root, width=15, font = 16, textvariable = StringVar())
 text11.grid(row=10, column=1, sticky=tk.E)
 
 def enter(): #get the inputs from GUI and return it
-    a = text1.get()
-    b = text2.get()
-    c = text3.get()
-    d = text4.get()
-    e = text5.get()
-    f = text6.get()
-    g = text7.get()
-    h = text8.get()
-    i = text9.get()
-    j = text10.get()
-    k = text11.get()
-    v = (a, b, c, d, e, f, g, h, i ,j ,k)
-    print(v)
+    income = text1.get()
+    costs = text2.get()
+    tax_rate = text3.get()
+    starting_age = text4.get()
+    retirement_age = text5.get()
+    pension = text6.get()
+    investment_fraction = text7.get()
+    life_inflation = text8.get()
+    interest_rate = text9.get()
+    inflation_proc = text10.get()
+    pay_rise = text11.get()
+    a = Life(income, costs, tax_rate, starting_age, retirement_age, pension, investment_fraction, life_inflation
+    , interest_rate ,inflation_proc ,pay_rise)
+    print(a)
+    return a
+    # v = (a, b, c, d, e, f, g, h, i ,j ,k)
+    # return v
 
 enterbtn = tk.Button(root, height=1, text='Enter', font=16, command=enter) #button
 enterbtn.grid(pady=11, column=1)
 
 you = enter()
 
-df = simulate(you)
+print(you)
 
 root.mainloop()
+
+df = simulate(you)
+
+df.plot(kind='line',x='time',y=['wallet (non-investor)','wallet (investor)', 'investment bucket (investor)'],
+    color=['gray', 'black', 'gold'], grid=True, title='Finance Graph', xlabel='Time', ylabel='Money', xlim=0)
+
+
 
 
 

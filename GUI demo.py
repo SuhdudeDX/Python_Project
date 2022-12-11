@@ -77,68 +77,72 @@ def simulate(you):
     df2 = pd.DataFrame({'time': t2, 'wallet (non-investor)': x1_2[:, 0], 'wallet (investor)': x2_2[:, 0], 'investment bucket (investor)': x2_2[:, 1]})
     return pd.concat([df0, df1, df2])
 
-text1 = StringVar()
-incometext = tk.Label(root, text='Income', font=16).grid(row=0, sticky=tk.W)
-text1 = tk.Entry(root, width=15, font = 16)
-text1.grid(row=0, column=1, sticky=tk.E)
+# text1 = StringVar()
+# incometext = tk.Label(root, text='Income', font=16).grid(row=0, sticky=tk.W)
+# text1 = tk.Entry(root, width=15, font = 16)
+# text1.grid(row=0, column=1, sticky=tk.E)
 
-coststext = tk.Label(root, text='Spending', font=16).grid(row=1, sticky=tk.W)
-text2 = tk.Entry(root, width=15, font = 16)
-text2.grid(row=1, column=1, sticky=tk.E)
+# coststext = tk.Label(root, text='Spending', font=16).grid(row=1, sticky=tk.W)
+# text2 = tk.Entry(root, width=15, font = 16)
+# text2.grid(row=1, column=1, sticky=tk.E)
 
-taxtext = tk.Label(root, text='Tax', font=16).grid(row=2, sticky=tk.W)
-text3 = tk.Entry(root, width=15, font = 16)
-text3.grid(row=2, column=1, sticky=tk.E)
+# taxtext = tk.Label(root, text='Tax', font=16).grid(row=2, sticky=tk.W)
+# text3 = tk.Entry(root, width=15, font = 16)
+# text3.grid(row=2, column=1, sticky=tk.E)
 
-startage = tk.Label(root, text='Starting Age', font=16).grid(row=3, sticky=tk.W)
-text4 = tk.Entry(root, width=15, font = 16)
-text4.grid(row=3, column=1, sticky=tk.E)
+# startage = tk.Label(root, text='Starting Age', font=16).grid(row=3, sticky=tk.W)
+# text4 = tk.Entry(root, width=15, font = 16)
+# text4.grid(row=3, column=1, sticky=tk.E)
 
-retireage = tk.Label(root, text='Retiring Age', font=16).grid(row=4, sticky=tk.W)
-text5 = tk.Entry(root, width=15, font = 16)
-text5.grid(row=4, column=1, sticky=tk.E)
+# retireage = tk.Label(root, text='Retiring Age', font=16).grid(row=4, sticky=tk.W)
+# text5 = tk.Entry(root, width=15, font = 16)
+# text5.grid(row=4, column=1, sticky=tk.E)
 
-pensiontext = tk.Label(root, text='Pension', font=16).grid(row=5, sticky=tk.W)
-text6 = tk.Entry(root, width=15, font = 16)
-text6.grid(row=5, column=1, sticky=tk.E)
+# pensiontext = tk.Label(root, text='Pension', font=16).grid(row=5, sticky=tk.W)
+# text6 = tk.Entry(root, width=15, font = 16)
+# text6.grid(row=5, column=1, sticky=tk.E)
 
-Investfractext = tk.Label(root, text='Investment Fraction', font=16).grid(row=6, sticky=tk.W)
-text7 = tk.Entry(root, width=15, font = 16)
-text7.grid(row=6, column=1, sticky=tk.E)
+# Investfractext = tk.Label(root, text='Investment Fraction', font=16).grid(row=6, sticky=tk.W)
+# text7 = tk.Entry(root, width=15, font = 16)
+# text7.grid(row=6, column=1, sticky=tk.E)
 
-lifeinflationtext = tk.Label(root, text='Life Inflation', font=16).grid(row=7, sticky=tk.W)
-text8 = tk.Entry(root, width=15, font = 16)
-text8.grid(row=7, column=1, sticky=tk.E)
+# lifeinflationtext = tk.Label(root, text='Life Inflation', font=16).grid(row=7, sticky=tk.W)
+# text8 = tk.Entry(root, width=15, font = 16)
+# text8.grid(row=7, column=1, sticky=tk.E)
 
-IRproctext = tk.Label(root, text='Interest Rate', font=16).grid(row=8, sticky=tk.W)
-text9 = tk.Entry(root, width=15, font = 16)
-text9.grid(row=8, column=1, sticky=tk.E)
+# IRproctext = tk.Label(root, text='Interest Rate', font=16).grid(row=8, sticky=tk.W)
+# text9 = tk.Entry(root, width=15, font = 16)
+# text9.grid(row=8, column=1, sticky=tk.E)
 
-IFproctext = tk.Label(root, text='Inflation Proc', font=16).grid(row=9, sticky=tk.W)
-text10 = tk.Entry(root, width=15, font = 16)
-text10.grid(row=9, column=1, sticky=tk.E)
+# IFproctext = tk.Label(root, text='Inflation Proc', font=16).grid(row=9, sticky=tk.W)
+# text10 = tk.Entry(root, width=15, font = 16)
+# text10.grid(row=9, column=1, sticky=tk.E)
 
-Pay_risetext = tk.Label(root, text='Pay rise', font=16).grid(row=10, sticky=tk.W)
-text11 = tk.Entry(root, width=15, font = 16)
-text11.grid(row=10, column=1, sticky=tk.E)
+# Pay_risetext = tk.Label(root, text='Pay rise', font=16).grid(row=10, sticky=tk.W)
+# text11 = tk.Entry(root, width=15, font = 16)
+# text11.grid(row=10, column=1, sticky=tk.E)
 
-def enter(): #get the inputs from GUI and return it
-    a = text1.get()
-    b = text2.get()
-    c = text3.get()
-    d = text4.get()
-    e = text5.get()
-    f = text6.get()
-    g = text7.get()
-    h = text8.get()
-    i = text9.get()
-    j = text10.get()
-    k = text11.get()
-    you = (a,b,c,d,e,f,g,h,i,j,k)
-    return you
+# def enter(): #get the inputs from GUI and return it
+#     a = text1.get()
+#     b = text2.get()
+#     c = text3.get()
+#     d = text4.get()
+#     e = text5.get()
+#     f = text6.get()
+#     g = text7.get()
+#     h = text8.get()
+#     i = text9.get()
+#     j = text10.get()
+#     k = text11.get()
+#     you = (a,b,c,d,e,f,g,h,i,j,k)
+#     return you
 
-enterbtn = tk.Button(root, height=1, text='Enter', font=16, command=enter) #button
-enterbtn.grid(pady=11, column=1)
+# enterbtn = tk.Button(root, height=1, text='Enter', font=16, command=enter) #button
+# enterbtn.grid(pady=11, column=1)
+
+
+
+root.mainloop()
 
 you = Life()
 
@@ -152,8 +156,9 @@ you.investment_fraction = 0.8
 you.life_inflation      = 50
 you.interest_rate_proc  = 3.3
 you.inflation_proc      = 3
-you.pay_rise            = 100 
+you.pay_rise            = 100
 
+print(you)
 # a = you.income
 # b = you.costs
 # c = you.tax_rate
@@ -170,9 +175,6 @@ df = simulate(you)
 
 df.plot(kind='line',x='time',y=['wallet (non-investor)','wallet (investor)', 'investment bucket (investor)'],
     color=['gray', 'black', 'gold'], grid=True, title='Finance Graph', xlabel='Time', ylabel='Money', xlim=0)
-
-root.mainloop()
-
 
 
 
